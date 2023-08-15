@@ -45,10 +45,13 @@ def sequence_to_text(sequence):
   return result
 
 
-def _clean_text(text, cleaner_names):
+def _clean_text(text, cleaner_names, backend=None):
   for name in cleaner_names:
     cleaner = getattr(cleaners, name)
     if not cleaner:
       raise Exception('Unknown cleaner: %s' % name)
-    text = cleaner(text)
+    if name != 'vietnamese_cleaners':
+      text = cleaner(text)
+    else:
+      text = cleaner(text, backend)
   return text
