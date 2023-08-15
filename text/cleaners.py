@@ -99,7 +99,7 @@ def english_cleaners2(text):
 def vietnamese_cleaners(text):
   ''' Pipeline for English text, including abbreviation expansion. + punctuation + stress'''
   text = lowercase(text)
-  text = expand_abbreviations(text)
+  #text = expand_abbreviations(text)
   phonemes = phonemize(text, language='vi', 
                      backend='espeak', 
                      strip=True, 
