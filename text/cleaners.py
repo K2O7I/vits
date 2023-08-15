@@ -49,9 +49,6 @@ def expand_abbreviations(text):
   return text
 
 
-def expand_numbers(text):
-  return normalize_numbers(text)
-
 
 def lowercase(text):
   return text.lower()
@@ -96,5 +93,18 @@ def english_cleaners2(text):
   text = lowercase(text)
   text = expand_abbreviations(text)
   phonemes = phonemize(text, language='en-us', backend='espeak', strip=True, preserve_punctuation=True, with_stress=True)
+  phonemes = collapse_whitespace(phonemes)
+  return phonemes
+
+def vietnamese_cleaners(text):
+  ''' Pipeline for English text, including abbreviation expansion. + punctuation + stress'''
+  text = lowercase(text)
+  text = expand_abbreviations(text)
+  phonemes = phonemize(text, language='vi', 
+                     backend='espeak', 
+                     strip=True, 
+                     preserve_punctuation=True, 
+                     with_stress=True,
+                     language_switch='remove-flags')
   phonemes = collapse_whitespace(phonemes)
   return phonemes
