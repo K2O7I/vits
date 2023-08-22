@@ -15,6 +15,7 @@ hyperparameter. Some cleaners are English-specific. You'll typically want to use
 import re
 from unidecode import unidecode
 from phonemizer import phonemize
+from unicodedata import normalize 
 #from phonemizer.backend import EspeakBackend
 
 # Regular expression matching whitespace:
@@ -99,7 +100,7 @@ def english_cleaners2(text):
 def vietnamese_cleaners(text, backend):
   ''' Pipeline for English text, including abbreviation expansion. + punctuation + stress'''
   text = lowercase(text)
-  #text = expand_abbreviations(text)
+  text = normalize('NFC', text)
   phonemes = backend.phonemize([text], strip=True)[0]
   
   phonemes = collapse_whitespace(phonemes)
@@ -109,6 +110,7 @@ def vietnamese_cleaners2(text):
   ''' Pipeline for English text, including abbreviation expansion. + punctuation + stress'''
   text = lowercase(text)
   #text = expand_abbreviations(text)
+  text = normalize('NFC', text)
   phonemes = phonemize(text, language='vi', backend='espeak', 
                        strip=True, preserve_punctuation=True, 
                        with_stress=True, language_switch='remove-flags')
