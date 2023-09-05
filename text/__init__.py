@@ -13,7 +13,11 @@ symbols = [x.replace("\n", "") for x in open('vocab_vn-mms.txt', encoding="utf-8
 _symbol_to_id = {s: i for i, s in enumerate(symbols)}
 _id_to_symbol = {i: s for i, s in enumerate(symbols)}
 
-
+  def filter_oov(self, text):
+      val_chars = _symbol_to_id
+      txt_filt = "".join(list(filter(lambda x: x in val_chars, text)))
+      #print(f"text after filtering OOV: {txt_filt}")
+      return txt_filt
 
 def text_to_sequence(text, cleaner_names):
   '''
