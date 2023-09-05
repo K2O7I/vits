@@ -9,7 +9,7 @@ backend_vn = EspeakBackend(language = 'vi',
                            language_switch='remove-flags')
 
 # Mappings from symbol to numeric ID and vice versa:
-symbols = [x.replace("\n", "") for x in open('vocab_vn-mms.txt', encoding="utf-8").readlines()]
+symbols = [x.replace("\n", "") for x in open('text/vocab_vn-mms.txt', encoding="utf-8").readlines()]
 _symbol_to_id = {s: i for i, s in enumerate(symbols)}
 _id_to_symbol = {i: s for i, s in enumerate(symbols)}
 
