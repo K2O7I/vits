@@ -1,6 +1,6 @@
 """ from https://github.com/keithito/tacotron """
 from text import cleaners
-from text.symbols import symbols
+#from text.symbols import symbols
 from phonemizer.backend import EspeakBackend
 
 backend_vn = EspeakBackend(language = 'vi', 
@@ -9,12 +9,14 @@ backend_vn = EspeakBackend(language = 'vi',
                            language_switch='remove-flags')
 
 # Mappings from symbol to numeric ID and vice versa:
+symbols = [x.replace("\n", "") for x in open('', encoding="utf-8").readlines()]
 _symbol_to_id = {s: i for i, s in enumerate(symbols)}
 _id_to_symbol = {i: s for i, s in enumerate(symbols)}
 
 
 def text_to_sequence(text, cleaner_names):
-  '''Converts a string of text to a sequence of IDs corresponding to the symbols in the text.
+  '''
+    Converts a string of text to a sequence of IDs corresponding to the symbols in the text.
     Args:
       text: string to convert to a sequence
       cleaner_names: names of the cleaner functions to run the text through
